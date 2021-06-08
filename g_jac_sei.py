@@ -6,8 +6,6 @@ from numpy.random import RandomState
 np.set_printoptions(suppress=True)
 random_state = RandomState(1240)
 
-a = np.zeros((3,4))
-
 diag_dom_condition = False
 
 # Generate diagonally dominant matrix
@@ -19,8 +17,6 @@ while diag_dom_condition != True:
 	(np.abs(a[2][2])>np.abs(a[2][0])+np.abs(a[2][1]))
 
 print(a)
-
-#a = 20 * np.random.rand(3, 4)
 
 # Defining equations to be solved
 # in diagonally dominant form
@@ -59,7 +55,7 @@ def gauss_jacobi(x,y,z,e):
 	print('\nCount\tx\ty\tz\n')
 	while condition:
 		# In Gauss Jacobi, values of variables
-		# avialable from last iteration are used
+		# available from last iteration are used
 		x1 = f1(x,y,z)
 		y1 = f2(x,y,z)
 		z1 = f3(x,y,z)
