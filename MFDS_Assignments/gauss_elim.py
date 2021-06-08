@@ -22,14 +22,14 @@ d = int(input('Enter the precision value d: '))
 b = random_state.uniform(low=1, high=20, size=(n,n+1))
 
 # Storing NumPy array according to user's precision
-a = np.array([[0.0004, 1.4020, 1.4060],[0.4003, -1.5020, 2.5010]])
+#a = np.array([[0.0004, 1.4020, 1.4060],[0.4003, -1.5020, 2.5010]])
 #a = 10 * np.random.rand(n, n+1)
 
-"""a = 10 * random_state.rand(n, n+1)
+a = 10 * random_state.rand(n, n+1)
 for i in range(n):
 	for j in range(n+1):
 		a[i][j] = np.around(a[i][j], decimals = my_round(d, a[i][j]))
-print(a)"""
+print(a)
 
 c = copy.deepcopy(a)
 e = copy.deepcopy(a)
