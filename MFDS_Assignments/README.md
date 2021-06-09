@@ -14,4 +14,4 @@ In file gauss_elim.py, the Gaussian Elimination method is showcased. It takes ra
 
 In file g_jac_sei.py, the Gauss Seidel and Jacobi methods are showcased. This takes randomly generated diagonally dominant matrices of size [3 x 4] in the form of augmented matrix. Then the convergence criteria is used to arrive at the solution obtained from the two methods.
 
-The Python Jupyter Notebook for Assignment 1: https://colab.research.google.com/drive/1o3Edv7zKzVe4O4vcQEm36gOsMG3N_eRE#scrollTo=JhPmzl9XmSW8
+The Python Jupyter Notebook for Assignment 1: https://colab.research.google.com/drive/1o3Edv7zKzVe4O4vcQEm36gOsMG3N_eRE?usp=sharing
