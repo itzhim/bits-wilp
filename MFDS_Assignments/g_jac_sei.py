@@ -18,7 +18,14 @@ while diag_dom_condition != True:
 
 # Generate matrix which can't be made diagonally dominant
 # Note: This is for augmented matrix 
-# i.e. for mxn matrix, mx(n-1) matrix would be diagonally non-dominant
+# i.e. for m x n matrix, m x (n-1) matrix would be diagonally non-dominant
+
+"""Also note that a matrix which looks diagonally non-dominant
+may be converted to diagonally dominant by interchanging the rows.
+Hence, it's necessary to take care of this condition as well by 
+making rows whose absolute value of each element is smaller than 
+the sum of absolute values of other elements in the same row"""
+
 size = int(input("Enter size of matrix: "))
 
 flag = 0
