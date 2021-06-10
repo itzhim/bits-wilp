@@ -10,7 +10,7 @@ diag_dom_condition = False
 
 # Generate diagonally dominant matrix
 while diag_dom_condition != True:
-	a = 20 * random_state.rand(3, 4)
+	a = 10 * random_state.rand(3, 4)
 	a = np.around(a, decimals=4)
 	diag_dom_condition = (np.abs(a[0][0])>np.abs(a[0][1])+np.abs(a[0][2])) and \
 	(np.abs(a[1][1])>np.abs(a[1][0])+np.abs(a[1][2])) and \
@@ -24,7 +24,7 @@ size = int(input("Enter size of matrix: "))
 flag = 0
 while (flag != size*size):
 	flag = 0
-	b = 20 * random_state.rand(size,size+1)
+	b = 10 * random_state.rand(size,size+1)
 	b = np.around(b, decimals=4)
 	for i in range(len(b[:,0])):
 		for j in range(len(b[0,:])-1):
