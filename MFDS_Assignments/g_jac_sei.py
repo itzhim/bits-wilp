@@ -35,7 +35,6 @@ def gauss_seidal(x,y,z,e):
 		x1 = round(f1(x,y,z),4)
 		y1 = round(f2(x1,y,z),4)
 		z1 = round(f3(x1,y1,z),4)
-		print(x1,y1,z1)
 		print('%d\t%0.4f\t%0.4f\t%0.4f\n' %(count, x1,y1,z1))
 		e1 = abs((x-x1)/x1);
 		e2 = abs((y-y1)/y1);
