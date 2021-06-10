@@ -40,18 +40,84 @@ while (flag != size*size):
 			else:
 				flag -= 1
 
-print("This is your diagonally dominant matrix:")
+print("\nThis is your diagonally dominant matrix:")
 print(a)
 
-print("This is your diagonally non-dominant matrix:")
+print("\nThis is your diagonally non-dominant matrix:")
 print(b)
 
-diag_dom = int(input("Enter the condition: 0 for digonally dominant, 1 for digonally non-dominant: "))
+diag_dom = int(input("\nEnter the condition: 0 for diagonally dominant, 1 for diagonally non-dominant: "))
 
 if diag_dom == 0:
 	c = copy.deepcopy(a)
 elif diag_dom == 1:
 	c = copy.deepcopy(b)
+
+
+def decompose(A):
+  nrow = len(A[:,0])
+  L = np.tril(A)
+  U = np.triu(A)
+  for i in range(nrow):
+    L[i][i] = 0.0
+    U[i][i] = 0.0
+  return L,np.identity(nrow),U
+
+# For the norm calculation of Gauss Seidal method
+# normalized matrix is used
+def norm_gs(A):
+	nrow = len(A[:,0])
+	for i in range(nrow):
+		A[i] = A[i]/A[i][i]
+	
+	L, I, U = decompose(d)
+	
+	i_plus_l = I + L
+	i_plus_l_inv = np.linalg.inv(i_plus_l)
+	
+	p = np.matmul(i_plus_l_inv,U)
+	frob_norm = np.linalg.norm(p)
+	print("\nThe Frobenius norm for Gauss Seidal method is: " + str(frob_norm))
+	
+	col_sum = []
+	for i in range(len(p[:,0])):
+		sum = np.sum(abs(p[i]))
+		col_sum.append(sum)
+	
+	p_inf_norm = max(col_sum)
+	print("The infinite norm for Gauss Seidal method is: " + str(p_inf_norm))
+	
+	if p_inf_norm < 1.0:
+		print("\nWe can guarantee that this matrix would converge!")
+
+# For the norm calculation of Gauss Jacobi method
+# unnormalized matrix is used
+def norm_gj(A):
+	L, I, U = decompose(A)
+	D = np.diag(np.diag(A))
+
+	l_plus_u = L + U
+	d_inv = np.linalg.inv(D)
+
+	p = -np.matmul(d_inv,l_plus_u)
+	frob_norm = np.linalg.norm(p)
+	print("\nThe Frobenius norm for Gauss Jacobi method is: " + str(frob_norm))
+	
+	col_sum = []
+	for i in range(len(p[:,0])):
+		sum = np.sum(abs(p[i]))
+		col_sum.append(sum)
+	
+	p_inf_norm = max(col_sum)
+	print("The infinite norm for Gauss Jacobi method is: " + str(p_inf_norm))
+	
+	if p_inf_norm < 1.0:
+		print("\nWe can guarantee that this matrix would converge!")
+
+e = copy.deepcopy(c)
+d  = e[:,:size]
+norm_gs(d)
+norm_gj(d)
 
 # Defining equations to be solved
 # in diagonally dominant form
