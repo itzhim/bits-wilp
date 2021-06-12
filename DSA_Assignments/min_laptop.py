@@ -58,32 +58,37 @@ In this example minimum laptops required would be 3.
 
 # Make sure heap can be made of the array
 
-def max_heapify(arr, n, i):
-	largest = i # Initialize largest as root
-	l = 2 * i + 1	 # left = 2*i + 1
-	r = 2 * i + 2	 # right = 2*i + 2
+def max_heapify(B, n, s):
+	largest = s # Initialize largest as root
+	left = 2 * s + 1
+	right = 2 * s + 2
 
 	# See if left child of root exists and is
 	# greater than root
-	if l < n and arr[largest] < arr[l]:
-		largest = l
+	if left < n and B[left] > B[s]:
+		largest = left
+	else:
+		largest = s
 
 	# See if right child of root exists and is
 	# greater than root
-	if r < n and arr[largest] < arr[r]:
-		largest = r
+	if right < n and B[right] > B[largest]:
+		largest = right
 
 	# Change root, if needed
-	if largest != i:
-		arr[i], arr[largest] = arr[largest], arr[i] # swap
+	if largest != s:
+		B[s], B[largest] = B[largest], B[s] # swap
 
 		# Heapify the root.
-		max_heapify(arr, n, largest)
+		max_heapify(B, n, largest)
 
-# Below function builds a max-heap (as shown in DSA slides).
+# Below function builds a max-heap (as shown in DSA slides)
 def max_heap_building(max_heap, n):
 
-	# floor(n/2) is taken because non-leaf nodes are from 1 to n/2
+	# floor(n/2) - 1 is taken in for loop
+	# because non-leaf nodes are from 0 to floor(n/2) - 1
+	# In DSA slides this runs from floor(n/2) to 1 because 
+	# the starting index is 1 there
 	for i in range(n//2 - 1, -1, -1): 
 		max_heapify(max_heap, n, i)
 
