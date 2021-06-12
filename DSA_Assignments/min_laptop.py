@@ -80,40 +80,40 @@ def max_heapify(arr, n, i):
 		# Heapify the root.
 		max_heapify(arr, n, largest)
 
-# The main function to sort an array of given size
+# Below function builds a max-heap (as shown in DSA slides).
+def max_heap_building(max_heap, n):
+
+	# Here 0 is provided in range so that loop iterates till n=1
+	for i in range(n//2 , 0, -1): 
+		max_heapify(max_heap, n, i)
+
+	return max_heap
+
+# Below function sorts an array using Heap Sort
 def heap_sort(arr):
 	n = len(arr)
 
-	# Here we are making a max-heap.
-	#for i in range(n//2 - 1, -1, -1):
-		#max_heapify(arr, n, i)
-
-	for i in range(n//2 , 0, -1):
-		max_heapify(arr, n, i)
+	# Build a max-heap
+	heap = max_heap_building(arr, n)
 
 	# Below is similar to removal of elements from heap
 	# and making a max-heap of remaining elements
-	for i in range(n-1, 0, -1):
-		arr[i], arr[0] = arr[0], arr[i] # swap
-		max_heapify(arr, i, 0)
-	#print("Inside heapsort: " + str(arr))
+	for i in range(n-1, 0, -1): 
+		heap[i], heap[0] = heap[0], heap[i]
+		max_heapify(heap, i, 0)
 
 
 def laptop_required(b_time, r_time, n):
 
-	# Sort borrowal and return arrays
+	# Sort borrowal time and return time arrays
 	heap_sort(b_time)
 	heap_sort(r_time)
 
-	# laptop_needed indicates number of laptops
-	# needed at a time
 	laptop_needed = 1
-	result = 1
+	min_laptop_required = 1
 	i = 1
 	j = 0
 
-	# Similar to merge in merge sort to process
-	# all events in sorted order
 	while (i < n and j < n):
 
 		# If next event in sorted order is borrowal,
@@ -131,11 +131,11 @@ def laptop_required(b_time, r_time, n):
 			j += 1
 			#print("Inside elif-> laptop_needed: " + str(laptop_needed) + ", " + str(i) + ", " + str(j))
 
-		# Update result if needed
-		if (laptop_needed > result):
-			result = laptop_needed
+		# Update minimum laptop required
+		if (laptop_needed > min_laptop_required):
+			min_laptop_required = laptop_needed
 
-	return result
+	return min_laptop_required
 
 with open("inputsPS11.txt","r+") as  input_file:
 	lines = input_file.readlines()
@@ -148,11 +148,12 @@ for i in range(1, len(lines)):
 	borrow_time.append(int(time_intervals[0]))
 	return_time.append(int(time_intervals[1]))
 
-n = len(borrow_time)
+n_students = len(borrow_time)
+
+final_output = laptop_required(borrow_time, return_time, n_students)
 
 with open("outputPS11.txt", "w+") as output_file:
-	output_file.write("Minimum laptops required: " + str(laptop_required(borrow_time, return_time, n)))
+	output_file.write("Minimum laptops required: " + str(final_output))
 	output_file.close()
 
-print("Minimum laptops required: ",
-	laptop_required(borrow_time, return_time, n))
+print("Minimum laptops required: " + str(final_output))
