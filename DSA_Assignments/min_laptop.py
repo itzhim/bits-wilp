@@ -83,8 +83,8 @@ def max_heapify(arr, n, i):
 # Below function builds a max-heap (as shown in DSA slides).
 def max_heap_building(max_heap, n):
 
-	# Here 0 is provided in range so that loop iterates till n=1
-	for i in range(n//2 , 0, -1): 
+	# floor(n/2) is taken because non-leaf nodes are from 1 to n/2
+	for i in range(n//2 - 1, -1, -1): 
 		max_heapify(max_heap, n, i)
 
 	return max_heap
