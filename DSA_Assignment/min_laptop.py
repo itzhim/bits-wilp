@@ -63,14 +63,14 @@ def max_heapify(B, n, s):
 	left = 2 * s + 1
 	right = 2 * s + 2
 
-	# See if left child of root exists and is
+	# Check if left child of root exists and is
 	# greater than root
 	if left < n and B[left] > B[s]:
 		largest = left
 	else:
 		largest = s
 
-	# See if right child of root exists and is
+	# Check if right child of root exists and is
 	# greater than root
 	if right < n and B[right] > B[largest]:
 		largest = right
