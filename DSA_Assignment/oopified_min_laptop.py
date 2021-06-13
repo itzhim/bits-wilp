@@ -100,10 +100,9 @@ class MaxHeap:
 		self.Heap[fpos], self.Heap[spos] = (self.Heap[spos],
 											self.Heap[fpos])
 
+	# Function to heapify the node at pos (motivation from DSA slides)
 	def maxHeapify(self, pos):
-		largest = pos # Initialize largest as root
-		#left = 2 * s + 1
-		#right = 2 * s + 2
+		largest = pos
 
 		# Check if left child of root exists and is
 		# greater than root
