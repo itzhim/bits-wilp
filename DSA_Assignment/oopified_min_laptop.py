@@ -204,31 +204,36 @@ def convert_input(lines):
 
 	return bor_time, ret_time
 
+def create_output(file_name, output):
+	with open(file_name, "w+") as file:
+		file.write("Minimum laptops required: " + str(output))
+		file.close()
+
+	print("Minimum laptops required: " + str(output))
+
+def create_heap(arr, size):
+	max_heap = MaxHeap(n_students)
+
+	for i in range(0, size):
+		max_heap.insert(arr[i])
+	return max_heap
+
+def heap_sort(heap, size):
+	sorted_heap = []
+
+	for i in range(0, size):
+		sorted_heap.insert(0, heap.extractMax())
+
+	return sorted_heap
 
 # Driver Code
 if __name__ == "__main__":
 	borrow_time, return_time = convert_input(read_input("inputsPS11.txt"))
-
 	n_students = len(borrow_time)
 
-	b_time_Heap = MaxHeap(n_students)
-	r_time_Heap = MaxHeap(n_students)
-
-	for i in range(0, n_students):
-		b_time_Heap.insert(borrow_time[i])
-		r_time_Heap.insert(return_time[i])
-
-	sorted_b_time = []
-	sorted_r_time = []
-
-	for i in range(0, n_students):
-		sorted_b_time.insert(0, b_time_Heap.extractMax())
-		sorted_r_time.insert(0, r_time_Heap.extractMax())
+	sorted_b_time = heap_sort(create_heap(borrow_time, n_students), n_students)
+	sorted_r_time = heap_sort(create_heap(return_time, n_students), n_students)
 
 	final_output = laptop_required(sorted_b_time, sorted_r_time, n_students)
 
-	with open("outputPS11.txt", "w+") as output_file:
-		output_file.write("Minimum laptops required: " + str(final_output))
-		output_file.close()
-
-	print("Minimum laptops required: " + str(final_output))
+	create_output("outputPS11.txt", final_output)
