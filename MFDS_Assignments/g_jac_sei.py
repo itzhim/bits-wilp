@@ -77,6 +77,7 @@ def norm_gs(A):
 	
 	p = np.matmul(i_plus_l_inv,U)
 	frob_norm = np.linalg.norm(p)
+	frob_norm = round(frob_norm, 4)
 	print("\nThe Frobenius norm for Gauss Seidal method is: " + str(frob_norm))
 	
 	col_sum = []
@@ -85,6 +86,7 @@ def norm_gs(A):
 		col_sum.append(sum)
 	
 	p_inf_norm = max(col_sum)
+	p_inf_norm = round(p_inf_norm, 4)
 	print("The infinite norm for Gauss Seidal method is: " + str(p_inf_norm))
 	
 	if p_inf_norm < 1.0:
@@ -101,6 +103,7 @@ def norm_gj(A):
 
 	p = -np.matmul(d_inv,l_plus_u)
 	frob_norm = np.linalg.norm(p)
+	frob_norm = round(frob_norm, 4)
 	print("\nThe Frobenius norm for Gauss Jacobi method is: " + str(frob_norm))
 	
 	col_sum = []
@@ -109,6 +112,7 @@ def norm_gj(A):
 		col_sum.append(sum)
 	
 	p_inf_norm = max(col_sum)
+	p_inf_norm = round(p_inf_norm, 4)
 	print("The infinite norm for Gauss Jacobi method is: " + str(p_inf_norm))
 	
 	if p_inf_norm < 1.0:
