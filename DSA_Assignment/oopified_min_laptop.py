@@ -193,15 +193,15 @@ def read_input(input_file):
 
 
 def convert_input(lines):
-	bor_time = []
-	ret_time = []
+	bor_t = []
+	ret_t = []
 
 	for i in range(1, len(lines)):
-		time_intervals = lines[i].split(", ")
-		bor_time.append(int(time_intervals[0]))
-		ret_time.append(int(time_intervals[1]))
+		t_int = lines[i].split(", ")
+		bor_t.append(int(t_int[0]))
+		ret_t.append(int(t_int[1]))
 
-	return bor_time, ret_time
+	return bor_t, ret_t
 
 def create_output(file_name, output):
 	with open(file_name, "w+") as file:
