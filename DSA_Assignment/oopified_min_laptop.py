@@ -189,9 +189,12 @@ def laptop_required(b_time, r_time, n):
 	return min_laptop_required
 
 def read_input(input_file):
-	with open(input_file,"r+") as file:
-		lines = file.readlines()
-	return lines
+	try:
+		with open(input_file,"r+") as file:
+			lines = file.readlines()
+		return lines
+	except:
+		sys.exit("Could not read input file. Please check")
 
 
 def convert_input(lines):
@@ -199,18 +202,25 @@ def convert_input(lines):
 	ret_t = []
 
 	for i in range(1, len(lines)):
-		t_int = lines[i].split(", ")
-		bor_t.append(int(t_int[0]))
-		ret_t.append(int(t_int[1]))
-
+		try:
+			t_int = lines[i].split(", ")
+			if t_int[0] != '': 
+				bor_t.append(int(t_int[0]))
+			if t_int[1] != '':
+				ret_t.append(int(t_int[1]))
+		except:
+			sys.exit("Something wrong with input format")
 	return bor_t, ret_t
 
 def create_output(file_name, output):
-	with open(file_name, "w+") as file:
-		file.write("Minimum laptops required: " + str(output))
-		file.close()
-
-	print("Minimum laptops required: " + str(output))
+	try:
+		with open(file_name, "w+") as file:
+			file.write("Minimum laptops required: " + str(output))
+			file.close()
+		print("Minimum laptops required: " + str(output))
+	except:
+		sys.exit("The output file could not be created")
+	
 
 def create_heap(arr, size):
 	max_heap = MaxHeap(n_students)
@@ -230,7 +240,10 @@ def heap_sort(heap, size):
 # Driver Code
 if __name__ == "__main__":
 	borrow_time, return_time = convert_input(read_input("inputsPS11.txt"))
-	n_students = len(borrow_time)
+	if (len(borrow_time)==len(return_time)):
+		n_students = len(borrow_time)
+	else:
+		sys.exit("Missing entry in input file! \nThe count of borrowal times don't match with return times")
 
 	sorted_b_time = heap_sort(create_heap(borrow_time, n_students), n_students)
 	sorted_r_time = heap_sort(create_heap(return_time, n_students), n_students)
