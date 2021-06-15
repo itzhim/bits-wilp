@@ -157,7 +157,8 @@ class MaxHeap:
 		self.maxHeapify(self.FRONT)
 		return popped
 
-
+# Core function which returns minimum 
+# laptops required to be rented
 def laptop_required(b_time, r_time, n):
 
 	laptop_needed = 1
@@ -188,6 +189,7 @@ def laptop_required(b_time, r_time, n):
 
 	return min_laptop_required
 
+# Function to read input file from user
 def read_input(input_file):
 	try:
 		with open(input_file,"r+") as file:
@@ -196,7 +198,9 @@ def read_input(input_file):
 	except:
 		sys.exit("Could not read input file. Please check")
 
-
+# Function to convert input time 
+# intervals to separate lists of 
+# borrowal and return times
 def convert_input(lines):
 	bor_t = []
 	ret_t = []
@@ -212,6 +216,7 @@ def convert_input(lines):
 			sys.exit("Something wrong with input format")
 	return bor_t, ret_t
 
+# Function to dump code output to a file
 def create_output(file_name, output):
 	try:
 		with open(file_name, "w+") as file:
@@ -221,7 +226,8 @@ def create_output(file_name, output):
 	except:
 		sys.exit("The output file could not be created")
 	
-
+# Function to create max-heap from 
+# input array
 def create_heap(arr, size):
 	max_heap = MaxHeap(n_students)
 
@@ -229,6 +235,8 @@ def create_heap(arr, size):
 		max_heap.insert(arr[i])
 	return max_heap
 
+# Function which calls Heap Sort algorithm
+# on the craeted max-heap
 def heap_sort(heap, size):
 	sorted_heap = []
 
