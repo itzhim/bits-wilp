@@ -106,14 +106,16 @@ class MaxHeap:
 
 		# Check if left child of root exists and is
 		# greater than root
-		if self.leftChild(pos) < self.size and self.Heap[self.leftChild(pos)] > self.Heap[pos]:
+		if (self.leftChild(pos) < self.size and 
+			self.Heap[self.leftChild(pos)] > self.Heap[pos]):
 			largest = self.leftChild(pos)
 		else:
 			largest = pos
 
 		# Check if right child of root exists and is
 		# greater than root
-		if self.rightChild(pos) < self.size and self.Heap[self.rightChild(pos)] > self.Heap[largest]:
+		if (self.rightChild(pos) < self.size and 
+			self.Heap[self.rightChild(pos)] > self.Heap[largest]):
 			largest = self.rightChild(pos)
 
 		# Change root, if needed
