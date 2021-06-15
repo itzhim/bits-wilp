@@ -50,7 +50,7 @@ Time	Borrowed/Returned	Laptops needed at this time
 Hence, minimum laptops required is the maximum of number of 
 laptops needed at any particular point of time.
 
-In this example minimum laptops required would be 3.
+In above example minimum laptops required would be 3.
 
 """
 
@@ -159,10 +159,10 @@ class MaxHeap:
 
 # Core function which returns minimum 
 # laptops required to be rented
-def laptop_required(b_time, r_time, n):
+def laptop_req(b_time, r_time, n):
 
-	laptop_needed = 1
-	min_laptop_required = 1
+	laptop_need = 1
+	min_laptop_req = 1
 	i = 1
 	j = 0
 
@@ -172,22 +172,20 @@ def laptop_required(b_time, r_time, n):
 		# increment count of laptops needed
 		if (b_time[i] < r_time[j]):
 
-			laptop_needed += 1
+			laptop_need += 1
 			i += 1
-			#print("Inside if-> laptop_needed: " + str(laptop_needed) + ", " + str(i) + ", " + str(j))
 
 		# Else decrement count of laptops needed
 		elif (b_time[i] >= r_time[j]):
 
-			laptop_needed -= 1
+			laptop_need -= 1
 			j += 1
-			#print("Inside elif-> laptop_needed: " + str(laptop_needed) + ", " + str(i) + ", " + str(j))
 
 		# Update minimum laptop required
-		if (laptop_needed > min_laptop_required):
-			min_laptop_required = laptop_needed
+		if (laptop_need > min_laptop_req):
+			min_laptop_req = laptop_need
 
-	return min_laptop_required
+	return min_laptop_req
 
 # Function to read input file from user
 def read_input(input_file):
@@ -236,7 +234,7 @@ def create_heap(arr, size):
 	return max_heap
 
 # Function which calls Heap Sort algorithm
-# on the craeted max-heap
+# on the created max-heap
 def heap_sort(heap, size):
 	sorted_heap = []
 
@@ -256,6 +254,6 @@ if __name__ == "__main__":
 	sorted_b_time = heap_sort(create_heap(borrow_time, n_students), n_students)
 	sorted_r_time = heap_sort(create_heap(return_time, n_students), n_students)
 
-	final_output = laptop_required(sorted_b_time, sorted_r_time, n_students)
+	final_output = laptop_req(sorted_b_time, sorted_r_time, n_students)
 
 	create_output("outputPS11.txt", final_output)
