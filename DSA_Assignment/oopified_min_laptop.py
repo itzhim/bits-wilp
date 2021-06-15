@@ -157,36 +157,6 @@ class MaxHeap:
 		self.maxHeapify(self.FRONT)
 		return popped
 
-# Core function which returns minimum 
-# laptops required to be rented
-def laptop_req(b_time, r_time, n):
-
-	laptop_need = 1
-	min_laptop_req = 1
-	i = 1
-	j = 0
-
-	while (i < n and j < n):
-
-		# If next event in sorted order is borrowal,
-		# increment count of laptops needed
-		if (b_time[i] < r_time[j]):
-
-			laptop_need += 1
-			i += 1
-
-		# Else decrement count of laptops needed
-		elif (b_time[i] >= r_time[j]):
-
-			laptop_need -= 1
-			j += 1
-
-		# Update minimum laptop required
-		if (laptop_need > min_laptop_req):
-			min_laptop_req = laptop_need
-
-	return min_laptop_req
-
 # Function to read input file from user
 def read_input(input_file):
 	try:
@@ -242,6 +212,36 @@ def heap_sort(heap, size):
 		sorted_heap.insert(0, heap.extractMax())
 
 	return sorted_heap
+
+# Core function which returns minimum 
+# laptops required to be rented
+def laptop_req(b_time, r_time, n):
+
+	laptop_need = 1
+	min_laptop_req = 1
+	i = 1
+	j = 0
+
+	while (i < n and j < n):
+
+		# If next event in sorted order is borrowal,
+		# increment count of laptops needed
+		if (b_time[i] < r_time[j]):
+
+			laptop_need += 1
+			i += 1
+
+		# Else decrement count of laptops needed
+		elif (b_time[i] >= r_time[j]):
+
+			laptop_need -= 1
+			j += 1
+
+		# Update minimum laptop required
+		if (laptop_need > min_laptop_req):
+			min_laptop_req = laptop_need
+
+	return min_laptop_req
 
 # Driver Code
 if __name__ == "__main__":
