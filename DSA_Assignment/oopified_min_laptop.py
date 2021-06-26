@@ -175,7 +175,9 @@ def convert_input(lines):
 
 	for i in range(1, len(lines)):
 		try:
-			t_int = lines[i].split(", ")
+			t_int = lines[i].split(",")
+			if len(t_int) > 2:
+				sys.exit()
 			if t_int[0] != '': 
 				bor_t.append(int(t_int[0]))
 			if t_int[1] != '':
