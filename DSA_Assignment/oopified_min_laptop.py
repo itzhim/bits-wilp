@@ -212,7 +212,8 @@ def heap_sort(heap, size):
 
 	for i in range(0, size):
 		sorted_heap.insert(0, heap.extractMax())
-
+		# Note: The above insert() is python in-built
+		# function and not our class function 
 	return sorted_heap
 
 # Core function which returns minimum 
