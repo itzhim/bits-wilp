@@ -1,8 +1,8 @@
-#boxes = [7, 8, 1, 7, 8, 7, 1, 2, 2, 3, 5]
-#wall_h = 38
+boxes = [7, 8, 1, 7, 8, 7, 1, 2, 2, 3, 5]
+wall_h = 38
 
-boxes = [6, 9, 13, 2, 18, 7, 22, 45, 3, 15, 1, 33]
-wall_h = 55
+#boxes = [6, 9, 13, 2, 18, 7, 22, 45, 3, 15, 1, 33]
+#wall_h = 55
 
 #n_boxes = [2, 10, 4, 9]
 #wall_h = 5
@@ -31,12 +31,15 @@ def min_boxes(t1_l, t2_l, boxes_l, count_t1, count_t2):
 
 	
 	if (t2_l >= t1_l):
+		# swap the priority of towers because the one with the more remaining height
+		# should be given more priority
 		temp = t1_l
 		t1_l = t2_l
 		t2_l = temp
 		boxes_l = boxes_l[2:]
 		print(t1_l, t2_l)
 		print(boxes_l)
+		# recursive call
 		tot_count = min_boxes(t1_l, t2_l, boxes_l, count_t1, count_t2)
 		if tot_count > 0:
 			return tot_count

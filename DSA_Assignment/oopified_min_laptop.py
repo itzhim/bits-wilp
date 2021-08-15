@@ -203,6 +203,8 @@ def create_heap(arr, size):
 
 	for i in range(0, size):
 		max_heap.insert(arr[i])
+	#max_heap.Print()
+	#print("\n")
 	return max_heap
 
 # Function which calls Heap Sort algorithm
