@@ -43,9 +43,10 @@ def heapSort(arr):
 
 
 # Driver code
-arr = [0, 7, 9, 0, 1, 4, 3]
+arr = [40, 20, 20, 10, 10, 40]
 heapSort(arr)
 n = len(arr)
+print(arr)
 print("Sorted array is")
 for i in range(n):
 	print("%d" % arr[i]),

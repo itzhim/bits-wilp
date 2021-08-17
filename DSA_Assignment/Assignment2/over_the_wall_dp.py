@@ -57,5 +57,5 @@ def min_boxes(t1_l, t2_l, boxes_l, count_t1, count_t2):
 		#print("hello")
 
 
-y = min_boxes(t1, t2, boxes, 1, 1)
+y = min_boxes(t1, t2, boxes, 0, 0)
 print(y)
