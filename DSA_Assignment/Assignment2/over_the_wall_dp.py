@@ -109,11 +109,11 @@ class MaxHeap:
         print("<Position> : (ht)")
         for i in range(1, (self.size // 2) + 1):
             if (i<=self.size):
-                print(" PARENT : (" + str(self.Heap[i].ht), end=")\t")
+                print(f" PARENT : ({self.Heap[i].ht})", end = "\t")
             if (2*i <= self.size):
-                print(" LEFT CHILD : (" + str(self.Heap[2 * i].ht), end=")\t")
+                print(f" LEFT CHILD : ({self.Heap[2 * i].ht})", end="\t")
             if ((2*i + 1) <= self.size):
-                print(" RIGHT CHILD : (" + str(self.Heap[2 * i + 1].ht) + ")")
+                print(f" RIGHT CHILD : ({self.Heap[2 * i + 1].ht})")
         print("")
 
 	# Function to remove and return the maximum
@@ -124,9 +124,7 @@ class MaxHeap:
         popped = self.Heap[self.FRONT]
         self.Heap[self.FRONT] = self.Heap[self.size]
         self.size -= 1
-		#self.minHeapify(self.FRONT)
         self.build_max_heap()
-		#print(popped)
         return popped
 
 def read_input(input_file):
