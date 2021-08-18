@@ -45,6 +45,7 @@ class MaxHeap:
         self.Heap.append(Block(1*sys.maxsize))
         self.FRONT = 1
 
+    @classmethod
 	# Function to return the position of
 	# parent for the node currently
 	# at pos
@@ -210,15 +211,18 @@ if __name__ == "__main__":
     num_testcases = int(inputlines[0])
     data_lines = inputlines[1:]
     f = open("outputPS11.txt", "w+")
+    print(len(data_lines))
+    if len(data_lines) != 2 * num_testcases: 
+        sys.exit("Something's wrong. I can feel it.") 
 
-    for i in range(0,len(data_lines),2):
+    for i in range(0, len(data_lines), 2):
         print("---------------TestCase_" + str(i//2) + "---------------")
         N = int(data_lines[i].split()[0])
         K = int(data_lines[i].split()[-1])
         block_list = [int(x) for x in data_lines[i + 1].split()]
 
         if(len(block_list) != N):
-            print("Something's wrong, I can feel it.")
+            sys.exit("Something's wrong, I can feel it.")
 
         heap = MaxHeap(N)
         for block in block_list:
@@ -230,10 +234,10 @@ if __name__ == "__main__":
         min_box = 0
         min_box, t1_rem_ht, t2_rem_ht = calculate_DP(heap, K, K, t1_blocks, t2_blocks, min_box)
         if ((t1_rem_ht > 0) or (t2_rem_ht > 0)):
-            print("Unable to build both towers.\nRemaining height for tower 1:\t" + str(t1_rem_ht) +
-                "\nRemaining height for tower 2:\t" + str(t2_rem_ht))
+            print(f"Unable to build both towers.\nRemaining height for tower 1: {t1_rem_ht} \
+                \nRemaining height for tower 2: {t2_rem_ht}")
         print(min_box)
 
-        f.write(str(min_box) + "\n")
+        f.write(f"{min_box} \n")
 
     f.close()
