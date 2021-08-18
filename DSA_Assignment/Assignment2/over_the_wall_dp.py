@@ -158,29 +158,31 @@ def append_box(block, Rem_ht):
         Rem_ht -= block
     return sub_blck_lst, Rem_ht
 
-
 """
 Creates two lists corresponding to the two towers, each containing the blocks 
 (identified by the block height) that were used to build that particular tower
 """
 # initially, remaining height of tower is K
-def calculate_DP(heap, t1_rem_ht, t2_rem_ht, t1_components, t2_components, tot_box):
+def calculate_DP(heap, t1_rem_ht, t2_rem_ht, t1_blocks, t2_blocks, tot_box):
 
     if (heap.size > 0):
         # simultaneous update
         # update for tower 1
         if (t1_rem_ht > 0):
-
             block = heap.extractMax()
+
+            # we want to prioritize the tower for which the difference
+            # of the remaining height and current block size is lesser
+            # this will save us from using extra boxes later on
             if (abs(t2_rem_ht - block.ht) < abs(t1_rem_ht - block.ht)):
                 temp = t1_rem_ht
                 t1_rem_ht = t2_rem_ht
                 t2_rem_ht = temp
                 ret_list, t1_rem_ht = append_box(block.ht, t1_rem_ht)
-                t1_components.extend(ret_list)
+                t1_blocks.extend(ret_list)
             else:
                 ret_list, t1_rem_ht = append_box(block.ht, t1_rem_ht)
-                t1_components.extend(ret_list)
+                t1_blocks.extend(ret_list)
 
         # check if we still have blocks left
         if (heap.size <= 0):
@@ -190,17 +192,17 @@ def calculate_DP(heap, t1_rem_ht, t2_rem_ht, t1_components, t2_components, tot_b
         if (t2_rem_ht > 0):
             block = heap.extractMax()
             ret_list, t2_rem_ht = append_box(block.ht, t2_rem_ht)
-            t2_components.extend(ret_list)
+            t2_blocks.extend(ret_list)
 
         if (t1_rem_ht <= 0 and t2_rem_ht <= 0):
-            return len(t1_components) + len(t2_components)
+            return len(t1_blocks) + len(t2_blocks), t1_rem_ht, t2_rem_ht
 
-        tot_box = calculate_DP(heap, t1_rem_ht, t2_rem_ht, t1_components, t2_components, tot_box)
-        
+        tot_box, t1_rem_ht, t2_rem_ht = calculate_DP(heap, t1_rem_ht, t2_rem_ht, t1_blocks, t2_blocks, tot_box)
+
     if tot_box > 0:
-        return tot_box
+        return tot_box, t1_rem_ht, t2_rem_ht
     else:
-        return -1
+        return -1, t1_rem_ht, t2_rem_ht
 
 if __name__ == "__main__":
 
@@ -210,7 +212,7 @@ if __name__ == "__main__":
     f = open("outputPS11.txt", "w+")
 
     for i in range(0,len(data_lines),2):
-        #print("---------------TestCase_" + str(i//2) + "---------------")
+        print("---------------TestCase_" + str(i//2) + "---------------")
         N = int(data_lines[i].split()[0])
         K = int(data_lines[i].split()[-1])
         block_list = [int(x) for x in data_lines[i + 1].split()]
@@ -221,13 +223,16 @@ if __name__ == "__main__":
         heap = MaxHeap(N)
         for block in block_list:
             heap.insert(block)
-        #heap.Print()
+        heap.Print()
 
-        t1_components = []
-        t2_components = []
+        t1_blocks = []
+        t2_blocks = []
         min_box = 0
-        min_box = calculate_DP(heap, K, K, t1_components, t2_components, min_box)
-        #print(min_box)
+        min_box, t1_rem_ht, t2_rem_ht = calculate_DP(heap, K, K, t1_blocks, t2_blocks, min_box)
+        if ((t1_rem_ht > 0) or (t2_rem_ht > 0)):
+            print("Unable to build both towers.\nRemaining height for tower 1:\t" + str(t1_rem_ht) +
+                "\nRemaining height for tower 2:\t" + str(t2_rem_ht))
+        print(min_box)
 
         f.write(str(min_box) + "\n")
 
