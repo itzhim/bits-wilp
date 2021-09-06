@@ -60,6 +60,9 @@ for i in range(0, 25):
 	# get value of tou for a particular iteration
 	#tou_val = tou.subs([(x1, starting_x[0]), (x2, starting_x[1]), (x3, starting_x[2]), (x4, starting_x[3]), \
 	#		(x5, starting_x[4])])
+	# we are not taking the calculated tou value because the above calculation is valid for convex functions
+	# but we have non-convex function as some of the coefficients are negative. 
+	# Hence we have manually tuned this tou value
 	tou_val = 0.009
 	#print(tou_val)
 
