@@ -20,6 +20,7 @@ def pre_process_data(data):
     # Create Pandas Dataframe
     df = pd.DataFrame(data)
 
+    # Replace tabs and ? with NaN 
     df.replace('\t?', np.nan, inplace=True)
     df.replace('?', np.nan, inplace=True)
 
