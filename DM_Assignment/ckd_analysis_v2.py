@@ -23,6 +23,7 @@ def pre_process_data(data):
     df.replace('\t?', np.nan, inplace=True)
     df.replace('?', np.nan, inplace=True)
 
+    # Assign values of 0 and 1 to binary attributes
     df['rbc'].replace({'normal': 0, 'abnormal': 1}, inplace=True)
     df['pc'].replace({'normal': 0, 'abnormal': 1}, inplace=True)
     df['pcc'].replace({'notpresent': 0, 'present': 1}, inplace=True)
@@ -35,12 +36,14 @@ def pre_process_data(data):
     df['ane'].replace({'no': 0, 'yes': 1}, inplace=True)
     df['diagnosis'].replace({'notckd': 0, 'ckd': 1}, inplace=True)
 
+    # Get the columns as list of features
     features = list(df.columns)
 
     # Convert features to float values
     for feature in features:
         df[feature] = df[feature].astype(float)
 
+    # Separate the features which are inherently integer and float types
     int_list = ['bp', 'al', 'pc', 'bu', 'pcv', 'wbcc', 'dm', 'appet', 'pe', 'pcc', 'ba', 'bgr', 'age', 'su', 'rbc', 'sod', 'cad', 'ane', 'diagnosis']
     float_list = ['sc', 'hemo', 'rbcc', 'htn', 'sg', 'pot']
 
@@ -60,6 +63,7 @@ def pre_process_data(data):
     cor_target = abs(cor["diagnosis"])
     relevant_features = cor_target[cor_target>0.5]
 
+    # Put the most relevant features into a list
     extracted_features = list(relevant_features.index)
 
     # Drop features which have very low correlation with output variable
@@ -71,14 +75,15 @@ def pre_process_data(data):
     # Drop irrelevant attributes from dataset (part of data cleaning)
     df.drop(dropped_features, axis=1, inplace=True)
 
+    # Save the pre-processed data to a CSV file
     df.to_csv('trimmed_data.csv')
 
     return df
 
 # Train the classifier model
 def train_classifier(df):
-    
-    # y is the output class and x is the dataset exclding the class
+
+    # y is the output class and x is the dataset excluding the class
     y = df.diagnosis.values
     x = df.drop(['diagnosis'], axis = 1)
 
