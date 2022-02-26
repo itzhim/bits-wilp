@@ -113,7 +113,7 @@ class MaxHeap:
                 print(" LEFT CHILD : (" + str(self.Heap[2 * i].ht), end=")\t")
             if ((2*i + 1) <= self.size):
                 print(" RIGHT CHILD : (" + str(self.Heap[2 * i + 1].ht) + ")")
-        print("")
+        print()
 
 	# Function to remove and return the maximum
 	# element from the heap
@@ -173,7 +173,7 @@ def calculate_Greedy(heap, K, f):
     while ((heap.size > 0) and ((tower1_rem_ht > 0) or ((tower2_rem_ht > 0)))):
         # simultaneous update
         # update for tower 1
-        #print(tower1_rem_ht, tower1_rem_ht)
+
         if (tower1_rem_ht > 0):
             block = heap.extractMax()
 
@@ -183,7 +183,9 @@ def calculate_Greedy(heap, K, f):
             # save us from using 2 boxes instead of 1. Note that 
             # this condition is not required for tower 1 as this 
             # functionality is indirectly incorporated for tower 1
-            if (tower2_rem_ht == block.ht):
+            #print(tower1_rem_ht, tower2_rem_ht, block.ht)
+            if (abs(tower2_rem_ht - block.ht) < 
+                abs(tower1_rem_ht - block.ht)):
                 temp = tower1_rem_ht
                 tower1_rem_ht = tower2_rem_ht
                 tower2_rem_ht = temp
@@ -210,13 +212,13 @@ def calculate_Greedy(heap, K, f):
     # write to the output file
 
     if ((tower1_rem_ht > 0) or (tower2_rem_ht > 0)):
-        print("Unable to build both towers.\nRemaining height for tower1:\t" + str(tower1_rem_ht) +
-              "\nRemaining height for tower2:\t" + str(tower2_rem_ht))
+        #print("Unable to build both towers.\nRemaining height for tower1:\t" + str(tower1_rem_ht) +
+              #"\nRemaining height for tower2:\t" + str(tower2_rem_ht))
         f.write("-1\n")
     else:
         len1 = len(tower1_components)
         len2 = len(tower2_components)
-        print(len1+len2)
+        #print(len1+len2)
         f.write(str(len1 + len2) + "\n")
 
 
@@ -228,7 +230,7 @@ if __name__ == "__main__":
     f = open("outputPS11.txt", "w+")
 
     for i in range(0,len(data_lines),2):
-        print("---------------TestCase_" + str(i//2) + "---------------")
+        #print("---------------TestCase_" + str(i//2) + "---------------")
         N = int(data_lines[i].split()[0])
         K = int(data_lines[i].split()[-1])
         block_list = [int(x) for x in data_lines[i + 1].split()]
@@ -239,11 +241,7 @@ if __name__ == "__main__":
         heap = MaxHeap(N)
         for block in block_list:
             heap.insert(block)
-        heap.Print()
+        #heap.Print()
 
         calculate_Greedy(heap, K, f)
-<<<<<<< HEAD
     f.close()
-=======
-    f.close()
->>>>>>> 2bed254f49d0fd17af03ab9a72412a80858c6ae6

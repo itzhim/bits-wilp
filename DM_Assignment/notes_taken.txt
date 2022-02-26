@@ -1,0 +1,48 @@
+1. Significant factors: htn, dm, bp
+   Less significant factors in decreasing order: appet, pe, ane, cad
+2. If diabetes is yes the blood glucose is bound to be high. Hence bgr may be removed
+3. No abnormalities seen in blood urea (bu) of patients who don't have ckd. While for ckd patients some of them have very high bu levels
+4. Point number 3 is also true for sc
+5. sod and pot are not much of huge factors. Both ck and notckd patients have similar levels
+6. The normal hemoglobin levels are 13.8 to 17.2 for male and 12.1 to 15.1 for female. All notckd patients have more normal levels whereas most ckd patients have hemo below this region
+7. pcv, wbcc and rbc attributes are missing a lot for ckd patients
+8. ckd patients have relatively low levels of pcv and rbc whereas notckd patients have higher levels (although these attributes may not be significant factors of contribution hence they may be removed)
+9. Age, sg is not a huge distinguishing factor b/w ckd and notckd (note that all notckd patients have sg of 1.02/1.025)
+10. Albumin (al) seems to be a very good factor as all notckd have al=0 but keep in mind that some ckd patients also have al=0
+11. Point number 10 also holds for rbc i.e. all notckd patients have normal rbc but few ckd patients also have normal rbc. Another point to note is that we are given rbcc attribute as well which make rbc as redundant. The normal rbcc range is 4.7 to 6.1 for males and 4.2 to 5.4 for females. So we can conclude accordingly if rbc is abnormal or not. Another issue which contributes in removal of rbc attribute from dataset is that it's values are missing for most of the patients (at the same time rbcc values are also missing a lot:) )
+12. Point number 10 also holds for pc i.e. all notckd patients have normal pc but few ckd patients also have normal pc.
+13. Point number 10 also holds for pcc and ba i.e. all notckd patients have them as "notpresent" but few ckd patients also have them as "notpresent". In fact most of the ckd patients as well have them as "notpresent" so these 2 can also be considered for removal from dataset
+14. rbc, pc, sod, pot, hemo, pcv, wbcc, rbcc are the attributes with a lot of missing values. So we can conclude from point 5 and 14 that sod and pot can also be removed from considerations
+15. su can also be derived from dm attribute as all patients with dm=no have su=0 and most of the patients dm=yes have su!=0
+16. Hence probable attributes for removal: age, rbc, pcc, ba, sod, pot, cad, ane, sg, su, bgr
+
+
+Attribute Subset Selection
+
+
+score : 0.96
+|--- hemoglobin <= 13.25
+|   |--- red blood cell count <= 5.20
+|   |   |--- packed cell volume <= 44.50
+|   |   |   |--- serum creatinine <= 0.95
+|   |   |   |   |--- blood urea <= 31.50
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- blood urea >  31.50
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- serum creatinine >  0.95
+|   |   |   |   |--- class: 1
+|   |   |--- packed cell volume >  44.50
+|   |   |   |--- class: 0
+|   |--- red blood cell count >  5.20
+|   |   |--- class: 0
+|--- hemoglobin >  13.25
+|   |--- diabetes <= 0.50
+|   |   |--- hypertension <= 0.68
+|   |   |   |--- white blood cell count <= 12950.00
+|   |   |   |   |--- class: 0
+|   |   |   |--- white blood cell count >  12950.00
+|   |   |   |   |--- class: 1
+|   |   |--- hypertension >  0.68
+|   |   |   |--- class: 1
+|   |--- diabetes >  0.50
+|   |   |--- class: 1
